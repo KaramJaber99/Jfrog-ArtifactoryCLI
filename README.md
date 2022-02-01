@@ -1,19 +1,17 @@
 README file for Api.py
 
-to run the program open terminal and type
+# artifactory-cli
+CLI for [JFrog Artifactory](https://www.jfrog.com/confluence/display/RTF)
 
-pip install argparse urllib3
-
-python Api.py
-
-and see the manual menu on how to run 
-
+## Setup
+Run: **pip install git+https://github.com/KaramJaber99/Jfrog-ArtifactoryCLI.git**
+Run: **pip install argparse urllib3**
 
 
-Command line interface in Python to manage an Artifactory SaaS instance
-via its API.
+Then make yourself familiar with available cli options by running: **final_test --help**
 
-it does the following things:
+
+## it does the following things:
 ● System Ping
 ● System Version
 ● Create User
@@ -25,7 +23,7 @@ it does the following things:
 
 
 
-sources used:
+## sources used:
 
 https://www.jfrog.com/confluence/display/JFROG/Artifactory+REST+API
 https://www.jfrog.com/confluence/display/JFROG/Repository+Configuration+JSON#RepositoryConfigurationJSON-application/vnd.org.jfrog.artifactory.repositories.LocalRepositoryCon
