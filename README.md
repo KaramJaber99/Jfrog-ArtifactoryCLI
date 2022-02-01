@@ -1,7 +1,11 @@
 README file for Api.py
+
 to run the program open terminal and type
+
 pip install argparse urllib3
-python Api.py 
+
+python Api.py
+
 and see the manual menu on how to run 
 
 
