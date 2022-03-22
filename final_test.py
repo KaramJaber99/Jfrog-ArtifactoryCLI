@@ -20,6 +20,8 @@ parser.add_argument("-c","--config", action="store_true",help="reconfig user con
 parser.add_argument("-rc","--repositoryCreate", action="store_true",help="create Repository")
 parser.add_argument("-rd","--repositoryDelete", action="store_true",help="delete Repository")
 parser.add_argument("-gr","--getrepos", action="store_true",help="view all Repositories")
+parser.add_argument("--list", nargs="+", default=["a", "b"])
+
 
 
 #Here we prase what we wrote up
@@ -31,6 +33,7 @@ HTTP = urllib3.PoolManager() #creating ConnectionPool instances for each host as
 
 #First of all we make a file for the user to save the username and pass and generate a token to use after that
 def main():
+
     #Checks if there is a user running the program if there is we let him choose what he want to do 
     #if not we make a new config file for a new user
     if not os.path.exists("config.json"):
@@ -60,16 +63,18 @@ def main():
 
 
 #Saves the user details to file and generating a token to access the api
-def config_client():
+def config_client(server,username,password1):
     configs = {} #instance a new configs dic to store the user details 
-    configs["server"] = input("server address:(Example yourservername.jfrog.io) ")
+    configs["server"] = server
     configs["context"] = "artifactory"
-    configs["username"] = input("username: ")
-    password = getpass()
+    configs["username"] = username
+    password = password1
     configs["access_token"] = login(configs["server"],configs["context"],configs["username"],password)
     with open("config.json","w") as f:
         json.dump(configs,f)
     print("Config written.")
+
+
 #reading the user details 
 def get_config(key=False):
     with open("config.json","r") as f:
@@ -114,6 +119,7 @@ def send_api_request(api_req,req_type="GET",data=""):
 
 #Pinging the Server if it working fine it will respond OK
 def ping():
+    config_client(sys.argv[3],sys.argv[4],sys.argv[5])
     server = get_config("server")
     print("pinging "+server)
     req ="/api/system/ping"
@@ -126,12 +132,14 @@ def ping():
 
 #Getting the version of the artifactory 
 def get_version():
+    config_client(sys.argv[3],sys.argv[4],sys.argv[5])
     req ="/api/system/version"
     resp = send_api_request(req)
     print(resp.data.decode('utf-8'))
 
 #Creating a new user 
 def create_user():
+    config_client(sys.argv[3],sys.argv[4],sys.argv[5])
     user_dict={}
     user_dict["name"] = input("name: ")
     user_dict["email"] = input("Email: ")
@@ -145,6 +153,7 @@ def create_user():
 
 #Deleting a existing user
 def delete_user():
+    config_client(sys.argv[3],sys.argv[4],sys.argv[5])
     username = input("please specify the user name you want to delete: ")
     if username != "":
         resp = send_api_request("/api/security/users/"+username,"DELETE")
@@ -158,12 +167,14 @@ def delete_user():
     
 #Getting the Storage info    
 def get_storage_info():
+    config_client(sys.argv[3],sys.argv[4],sys.argv[5])
     resp = send_api_request('/api/storageinfo')
     json_resp = json.loads(resp.data.decode('utf-8'))
     print(json.dumps(json_resp,indent=2))
 	
 #Creating a new repository in the Jfrog Artifactory     
 def create_repository():
+    config_client(sys.argv[3],sys.argv[4],sys.argv[5])
     repo_dict={}
     repo_dict["key"] = input("repo key: ")
     repo_dict["rclass"] = ("local")
@@ -177,6 +188,7 @@ def create_repository():
 
 #Deleting existing repository in the Jfrog Artifactory
 def delete_repository():
+    config_client(sys.argv[3],sys.argv[4],sys.argv[5])
     repository = input("please enter the Repository key you want to delete: ")
     if repository != "":
         resp = send_api_request("/api/repositories/"+repository, "DELETE")
@@ -191,9 +203,11 @@ def delete_repository():
 
 #Printing all the repos in the current artifactory 
 def get_repos():
+    config_client(sys.argv[3],sys.argv[4],sys.argv[5])
     resp = send_api_request('/api/repositories')
     json_resp = json.loads(resp.data.decode('utf-8'))
     print(json.dumps(json_resp, indent=2))
+
 
 if __name__ == "__main__":
     main()
