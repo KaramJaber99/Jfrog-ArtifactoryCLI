@@ -1,0 +1,79 @@
+resources:
+  - name: JfrogCli_repo
+    type: GitRepo
+    configuration:
+      gitProvider: MyGitHub                     # <-- replace with your integration
+      path: KaramJaber99/Jfrog-ArtifactoryCLI     # <-- replace with your repository name
+      branches:
+        include: master
+
+  - name: dbp_image
+    type: Image
+    configuration:
+      registry: MyArtifactory                        # <-- replace with your artifactory integration
+      sourceRepository: docker_local2               # <-- required if registry is Artifactory
+      imageName: pe16366karamj.jfrog.io/docker-local2/JfrogCli  # < -- replace with your image path and name
+      imageTag: latest
+      autoPull: true
+      
+  - name: JfrogCli_build_info
+    type: BuildInfo
+    configuration: MyArtifactory 
+      sourceArtifactory: 
+      buildName: JfrogCli_build
+      buildNumber: 1    
+
+  - name: JfrogCli_promoted_build_info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: MyArtifactory 
+      buildName: JfrogCli_build
+      buildNumber: 1
+      
+
+pipelines:
+  - name: pipeline_JfrogCli
+    steps:
+      - name: docker_build
+        type: DockerBuild
+        configuration:
+          affinityGroup: JfrogCli_group
+          dockerFileLocation: .
+          dockerFileName: Dockerfile
+          dockerImageName: pe16366karamj.jfrog.io/docker-local2/JfrogCli  # replace with your image path and name
+          dockerImageTag: ${run_number}
+          inputResources:
+            - name: JfrogCli_repo
+          integrations:
+            - name: MyArtifactory                            # <-- replace with your artifactory integration
+
+      - name: docker_push
+        type: DockerPush
+        configuration:
+          affinityGroup: JfrogCli_group
+          targetRepository: docker-local2
+          integrations:
+            - name: MyArtifactory                        # <-- replace with your artifactory integration
+          inputSteps:
+            - name: docker_build
+          outputResources:
+            - name: JfrogCli_image
+
+      - name: publish_JfrogCli_build
+        type: PublishBuildInfo
+        configuration:
+          inputSteps:
+            - name: docker_push
+          outputResources:
+            - name: JfrogCli_build_info
+
+      - name: promote_dbp_build
+        type: PromoteBuild
+        configuration:
+          targetRepository: demo-pipelines
+          integrations:
+            - name: MyArtifactory
+          inputResources:
+            - name: JfrogCli_build_info
+          outputResources:
+            - name: JfrogCli_promoted_build_info
