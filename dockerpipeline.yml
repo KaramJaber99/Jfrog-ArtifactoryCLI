@@ -66,3 +66,9 @@ pipelines:
             - name: docker_push
           outputResources:
             - name: JfrogCli_build_info
+
+       - name: xrayScanStep
+        type: XrayScan
+        configuration:
+          inputResources:
+            - name: JfrogCli_build_info
