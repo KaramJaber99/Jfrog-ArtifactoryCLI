@@ -66,14 +66,3 @@ pipelines:
             - name: docker_push
           outputResources:
             - name: JfrogCli_build_info
-
-      - name: promote_JfrogCli_build
-        type: PromoteBuild
-        configuration:
-          targetRepository: demo-pipelines
-          integrations:
-            - name: MyArtifactory
-          inputResources:
-            - name: JfrogCli_build_info
-          outputResources:
-            - name: JfrogCli_promoted_build_info
