@@ -57,7 +57,7 @@ pipelines:
           inputSteps:
             - name: docker_build
           outputResources:
-            - name: jfrogCli_image
+            - name: jfrogcli_image
 
       - name: publish_JfrogCli_build
         type: PublishBuildInfo
