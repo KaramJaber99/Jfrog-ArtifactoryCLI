@@ -7,7 +7,11 @@ resources:
       branches:
         include: master
 
+<<<<<<< HEAD
   - name: jfrogCli_image
+=======
+  - name: JfrogCli_image
+>>>>>>> 3fa91349a6e04ef09ddeff00fb5c8975af9612f9
     type: Image
     configuration:
       registry: MyArtifactory                        # <-- replace with your artifactory integration
@@ -18,8 +22,8 @@ resources:
       
   - name: JfrogCli_build_info
     type: BuildInfo
-    configuration: MyArtifactory 
-      sourceArtifactory: 
+    configuration:  
+      sourceArtifactory: MyArtifactory
       buildName: JfrogCli_build
       buildNumber: 1    
 
