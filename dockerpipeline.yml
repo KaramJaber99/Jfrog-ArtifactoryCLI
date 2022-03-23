@@ -7,16 +7,12 @@ resources:
       branches:
         include: master
 
-<<<<<<< HEAD
-  - name: jfrogCli_image
-=======
-  - name: JfrogCli_image
->>>>>>> 3fa91349a6e04ef09ddeff00fb5c8975af9612f9
+  - name: jfrogcli_image
     type: Image
     configuration:
       registry: MyArtifactory                        # <-- replace with your artifactory integration
       sourceRepository: docker_local2               # <-- required if registry is Artifactory
-      imageName: pe16366karamj.jfrog.io/docker-local2/jfrogCli  # < -- replace with your image path and name
+      imageName: pe16366karamj.jfrog.io/docker-local2/jfrogcli  # < -- replace with your image path and name
       imageTag: latest
       autoPull: true
       
