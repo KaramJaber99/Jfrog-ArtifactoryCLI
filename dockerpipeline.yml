@@ -23,13 +23,6 @@ resources:
       buildName: JfrogCli_build
       buildNumber: 1    
 
-  - name: JfrogCli_promoted_build_info
-    type: BuildInfo
-    configuration:
-      sourceArtifactory: MyArtifactory 
-      buildName: JfrogCli_build
-      buildNumber: 1
-      
 
 pipelines:
   - name: pipeline_JfrogCli
