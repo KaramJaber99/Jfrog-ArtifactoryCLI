@@ -6,3 +6,5 @@ resources:
       path: KaramJaber99/Jfrog-ArtifactoryCLI
       branches:
         include: master
+      buildOn:
+        commit: true
