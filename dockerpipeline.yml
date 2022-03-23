@@ -67,7 +67,7 @@ pipelines:
           outputResources:
             - name: JfrogCli_build_info
 
-       - name: xrayScanStep
+      - name: xrayScanStep
         type: XrayScan
         configuration:
           inputResources:
