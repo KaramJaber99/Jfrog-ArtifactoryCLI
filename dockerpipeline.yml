@@ -6,6 +6,8 @@ resources:
       path: KaramJaber99/Jfrog-ArtifactoryCLI     # <-- replace with your repository name
       branches:
         include: master
+      buildOn:
+        commit: false
 
   - name: jfrogcli_image
     type: Image
