@@ -23,5 +23,4 @@ RUN python3 -m pip install urllib3
 #Set working directory
 WORKDIR /home/jfrog/Jfrog-ArtifactoryCLI
 
-CMD [ "python3", "./final_test.py" ,"-p --list pe16366karamj.jfrog.io karamj@jfrog.com Admin1234!" ]
-
+CMD ["python3", "./final_test.py" ,"-p", "--list", "pe16366karamj.jfrog.io", "karamj@jfrog.com", "Admin1234!"]
