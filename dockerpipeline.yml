@@ -18,8 +18,8 @@ resources:
       
   - name: JfrogCli_build_info
     type: BuildInfo
-    configuration: MyArtifactory 
-      sourceArtifactory: 
+    configuration:  
+      sourceArtifactory: MyArtifactory
       buildName: JfrogCli_build
       buildNumber: 1    
 
