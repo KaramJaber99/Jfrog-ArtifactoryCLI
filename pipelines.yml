@@ -2,10 +2,7 @@ resources:
   - name: myFirstRepo
     type: GitRepo
     configuration:
-      # SCM integration where the repository is located
-      gitProvider: MyGitHub # this will be replaced from values.yml
-      # Repository path, including org name/repo name
+      gitProvider: MyGitHub 
       path: KaramJaber99/Jfrog-ArtifactoryCLI
       branches:
-        # Specifies which branches will trigger dependent steps
         include: master
