@@ -67,7 +67,7 @@ pipelines:
           outputResources:
             - name: JfrogCli_build_info
 
-      - name: promote_dbp_build
+      - name: promote_JfrogCli_build
         type: PromoteBuild
         configuration:
           targetRepository: demo-pipelines
