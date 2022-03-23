@@ -7,12 +7,12 @@ resources:
       branches:
         include: master
 
-  - name: JfrogCli_image
+  - name: jfrogCli_image
     type: Image
     configuration:
       registry: MyArtifactory                        # <-- replace with your artifactory integration
       sourceRepository: docker_local2               # <-- required if registry is Artifactory
-      imageName: pe16366karamj.jfrog.io/docker-local2/JfrogCli  # < -- replace with your image path and name
+      imageName: pe16366karamj.jfrog.io/docker-local2/jfrogCli  # < -- replace with your image path and name
       imageTag: latest
       autoPull: true
       
@@ -40,7 +40,7 @@ pipelines:
           affinityGroup: JfrogCli_group
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: pe16366karamj.jfrog.io/docker-local2/JfrogCli  # replace with your image path and name
+          dockerImageName: pe16366karamj.jfrog.io/docker-local2/jfrogCli  # replace with your image path and name
           dockerImageTag: ${run_number}
           inputResources:
             - name: JfrogCli_repo
@@ -57,7 +57,7 @@ pipelines:
           inputSteps:
             - name: docker_build
           outputResources:
-            - name: JfrogCli_image
+            - name: jfrogCli_image
 
       - name: publish_JfrogCli_build
         type: PublishBuildInfo
