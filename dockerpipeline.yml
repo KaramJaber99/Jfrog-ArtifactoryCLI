@@ -40,7 +40,7 @@ pipelines:
           affinityGroup: JfrogCli_group
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: pe16366karamj.jfrog.io/docker-local2/jfrogCli  # replace with your image path and name
+          dockerImageName: pe16366karamj.jfrog.io/docker-local2/jfrogcli  # replace with your image path and name
           dockerImageTag: ${run_number}
           inputResources:
             - name: JfrogCli_repo
