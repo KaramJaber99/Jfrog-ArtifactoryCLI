@@ -1,5 +1,5 @@
 "Hello Jfrog,This is my Assignment"
-"API for Jfrog artifactory"
+"API for Jfrog artifactcxzcxzczxcxory"
 import argparse #This library for the CLI
 import urllib3 #HTTP client
 from urllib.parse import urlencode #For splitting a URL string into its components
