@@ -1,26 +1,22 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
+ADD . /
 
 
-#installing git 
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y git
+
+RUN apt update
+RUN apt install python3 -y
+RUN apt-get update
+RUN apt-get -y install python3-pip
+RUN pip3 install argparse
+RUN pip3 install urllib3
 
 #Creating new folder in the ubuntu and cloaning our code into it to use it 
-RUN mkdir /home/jfrog       
-WORKDIR  /home/jfrog         
-RUN git clone https://github.com/KaramJaber99/Jfrog-ArtifactoryCLI.git
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    python\
-    python3-pip
-
-RUN pip install argparse
-
-RUN python3 -m pip install urllib3
+RUN mkdir /home/jfrog
+RUN mv /final_test.py /home/jfrog/final_test.py
+RUN mv /config.json /home/jfrog/config.json
 
 
 #Set working directory
-WORKDIR /home/jfrog/Jfrog-ArtifactoryCLI
+WORKDIR /home/jfrog
 
-CMD ["python3", "./final_test.py" ,"-p", "--list", "pe16366karamj.jfrog.io", "karamj@jfrog.com", "Admin1234!"]
+CMD ["python3", "./final_test.py" ,"-v", "--list", "pe16366karamj.jfrog.io", "karamj@jfrog.com", "Admin1234!"]
