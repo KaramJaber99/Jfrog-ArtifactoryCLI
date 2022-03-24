@@ -5,9 +5,7 @@ resources:
       gitProvider: MyGitHub                     # <-- replace with your integration
       path: KaramJaber99/Jfrog-ArtifactoryCLI     # <-- replace with your repository name
       branches:
-        include: master
-      buildOn:
-        commit: true
+        include: main
 
   - name: jfrogcli_image
     type: Image
