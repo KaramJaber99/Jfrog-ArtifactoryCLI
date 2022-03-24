@@ -39,6 +39,7 @@ pipelines:
           dockerImageTag: ${run_number}
           inputResources:
             - name: JfrogCli_repo
+              trigger: true
           integrations:
             - name: MyArtifactory                            # <-- replace with your artifactory integration
 
