@@ -19,4 +19,4 @@ RUN mv /config.json /home/jfrog/config.json
 #Set working directory
 WORKDIR /home/jfrog
 
-CMD ["python3", "./final_test.py" ,"-v", "--list", "pe16366karamj.jfrog.io", "karamj@jfrog.com", "Admin1234!"]
+CMD ["python3", "./final_test.py" ,"-v", "--list", "pe16366karamj.jfrog.io", "yourusername@jfrog.com", ""]
